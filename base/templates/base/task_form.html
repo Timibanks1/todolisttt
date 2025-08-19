@@ -1,0 +1,111 @@
+{% extends 'base/main.html' %}
+{% block content %}
+
+<style>
+  .form-container {
+    max-width: 500px;
+    margin: 50px auto;
+    background: white;
+    padding: 0;
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.15);
+  }
+
+  .form-header {
+    background: linear-gradient(135deg, #6a11cb, #2575fc);
+    color: white;
+    padding: 18px;
+    text-align: center;
+    font-size: 22px;
+    font-weight: 700;
+  }
+
+  .form-body {
+    padding: 25px;
+  }
+
+  .form-body label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 600;
+    color: #444;
+  }
+
+  .form-body input[type="text"],
+  .form-body textarea {
+    width: 100%;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    margin-bottom: 18px;
+    font-size: 15px;
+    transition: all 0.3s ease;
+  }
+
+  .form-body input[type="text"]:focus,
+  .form-body textarea:focus {
+    border: 1px solid #2575fc;
+    box-shadow: 0px 0px 8px rgba(37, 117, 252, 0.3);
+    outline: none;
+  }
+
+  .form-body input[type="checkbox"] {
+    margin-right: 8px;
+    transform: scale(1.2);
+    accent-color: #6a11cb;
+  }
+
+  /* Blue gradient Save button */
+  .form-body input[type="submit"] {
+    background: linear-gradient(135deg, #1e3c72, #2a5298);
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    width: 100%;
+  }
+
+  .form-body input[type="submit"]:hover {
+    opacity: 0.9;
+    transform: translateY(-2px);
+    box-shadow: 0px 4px 10px rgba(37, 117, 252, 0.4);
+  }
+
+  .form-body a {
+    display: inline-block;
+    margin-bottom: 15px;
+    color: #2575fc;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    transition: color 0.3s;
+  }
+
+  .form-body a:hover {
+    color: #6a11cb;
+    text-decoration: underline;
+  }
+</style>
+
+<div class="form-container">
+  <div class="form-header">
+    Task Form
+  </div>
+
+  <div class="form-body">
+    <a href="{% url 'task' %}">← Go Back</a>
+
+    <form method="POST">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <input type="submit" value="Save Task">
+    </form>
+  </div>
+</div>
+
+{% endblock content %}

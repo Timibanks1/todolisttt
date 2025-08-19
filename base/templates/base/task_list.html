@@ -1,0 +1,76 @@
+{% extends 'base/main.html' %}
+
+{% block content %}
+
+<style>
+
+.logout-btn {
+  display: inline-block;
+  background: linear-gradient(135deg, #ff416c, #ff4b2b);
+  color: white;
+  padding: 8px 16px;
+  border-radius: 6px;
+  text-decoration: none;
+  margin-bottom: 20px;
+}
+
+
+.add-task-btn {
+  display: inline-block;
+  background: linear-gradient(135deg, #36d1dc, #5b86e5);
+  color: white;
+  padding: 8px 12px;
+  border-radius: 6px;
+  text-decoration: none;
+  margin: 10px 0;
+}
+
+
+.btn-edit {
+  background: #3498db;
+  color: white;
+  padding: 6px 10px;
+  border-radius: 4px;
+  text-decoration: none;
+  margin-right: 5px;
+}
+
+.btn-delete {
+  background: #e74c3c;
+  color: white;
+  padding: 6px 10px;
+  border-radius: 4px;
+  text-decoration: none;
+}
+</style>
+
+<form method="post" action="{% url 'logout' %}" style="display:inline;">
+    {% csrf_token %}
+    <button type="submit" class="logout-btn">Logout</button>
+</form>
+
+<h2>My To Do List</h2>
+
+
+<a href="{% url 'task-create' %}" class="add-task-btn">+ Add Task</a>
+
+
+<table>
+    <tr>
+        <th>ITEM</th>
+        <th>ACTIONS</th>
+    </tr>
+
+    {% for task in tasks %}
+    <tr>
+        <td>{{ task.title }}</td>
+        
+        <td>
+            <a href="{% url 'task-update' task.id %}" class="btn-edit">Edit</a>
+            <a href="{% url 'task-delete' task.id %}" class="btn-delete">Delete</a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}
+
